@@ -1,0 +1,29 @@
+$clr-0: #000;
+$clr-1: #fff;
+$clr-2: #2292F5;
+$clr-3: #fdbc5a;
+$clr-4: rgba(189, 218, 255, 0.37);
+$clr-5: #e6e6e6;
+
+.top-bar {
+    background: $clr-2;
+    padding: 3px 15px;
+    text-align: right;
+    .logout-btn {
+        color: $clr-1;
+        font-size: small;
+        cursor: pointer;
+        transition: all ease-in-out 0.2s;
+        &:hover {
+            color: $clr-3;
+        }
+    }
+}
+
+.heading {
+    background: $clr-4;
+    padding: 10px;
+}
+.add-btn {
+    float: right;
+}
