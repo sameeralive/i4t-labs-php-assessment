@@ -53,8 +53,7 @@ export default {
             this.updateCompleteStatus();
         },
         editTodo(){
-            this.todo.archive = true;
-            this.updateCompleteStatus();
+
         }
     }
 }

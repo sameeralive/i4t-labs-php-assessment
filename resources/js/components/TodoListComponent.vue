@@ -8,30 +8,37 @@
     </div>
 
     <div class="mt-2">
-        <div v-for="(todo, index) in todoList" :key="index">
+        <div v-for="(todo, index) in todoList.data" :key="index">
             <todo-list-view
                 :todo="todo"
                 class="item"
                 v-on:itemChanged="getList"
             />
         </div>
+        <Bootstrap5Pagination
+            :data="todoList"
+            @pagination-change-page="getList"
+        />
+
     </div>
 
 </template>
 
 <script>
 import TodoListView from "../components/TodoListView.vue";
+import { Bootstrap5Pagination } from 'laravel-vue-pagination';
+
 export default {
-    components: {TodoListView},
+    components: {TodoListView, Bootstrap5Pagination},
     data: function () {
         return {
-            todoList: [],
+            todoList: {},
         }
     },
 
     methods: {
-        getList() {
-            axios.get('api/todos').then(res => {
+        getList(page = 1) {
+            axios.get('api/todos?page=' + page).then(res => {
                 this.todoList = res.data;
             }, err => {
                 console.log(err);
@@ -39,7 +46,7 @@ export default {
         }
     },
 
-    created() {
+    mounted() {
         this.getList();
     }
 
