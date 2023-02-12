@@ -1,6 +1,6 @@
 <template>
-    <div class="p-3">
-        <div class="heading mb-4 text-center">
+    <div class="px-3 py-5">
+        <div class="mb-4 text-center">
             <h5 id="title" v-if="!form.id">Todo Create</h5>
             <h5 id="title" v-if="form.id">Todo Update</h5>
         </div>

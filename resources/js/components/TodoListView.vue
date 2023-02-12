@@ -6,7 +6,13 @@
         <div class="form-check">
             <label class="form-check-label" for="important">
                 {{ todo.name }}
+                <span>
+                    <small>
+                        ({{ todo.date ? todo.date : '' }} {{ todo.time ? todo.time : '' }})
+                    </small>
+                </span>
             </label>
+            <p class="mb-0 float-start me-2" v-if="todo.completed"><small>Completed</small></p>
             <button v-if="!todo.archive" class="btn btn-sm btn-danger float-end ms-1" @click="removeTodo(todo.id)">
                 <font-awesome-icon icon="trash"/>
             </button>

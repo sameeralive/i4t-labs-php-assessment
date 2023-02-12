@@ -11,6 +11,7 @@
     </div>
 
     <div class="mt-2">
+        <h5 class="text-danger mt-4" v-if="archivedTodosList.length === 0">Archived list is empty!</h5>
         <div v-for="(todo, index) in archivedTodosList" :key="index">
             <todo-list-view
                 :todo="todo"

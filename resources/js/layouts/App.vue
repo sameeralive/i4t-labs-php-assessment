@@ -5,7 +5,7 @@
                 <div class="user-data">
                     <img src="../assets/img/user-icon.jpg" alt="user-icon">
                     <h4>Admin</h4>
-                    <p>sam@gmail.com</p>
+                    <p>sameera@gmail.com</p>
                 </div>
                 <ul class="data-summary">
                     <li>
