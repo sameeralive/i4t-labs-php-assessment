@@ -24,6 +24,21 @@ class TodoController extends Controller
             ->get();
     }
 
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function archivedTodoList()
+    {
+        return Todo::where('user_id', auth()->user()->id)
+            ->where('archive', 1)
+            ->where('active', 1)
+            ->orderBy('created_at', 'DESC')
+            ->get();
+    }
+
     /**
      * Show the form for creating a new resource.
      *

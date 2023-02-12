@@ -16,7 +16,7 @@
                                     <router-link class="nav-link" to="/">Todo List</router-link>
                                 </li>
                                 <li class="nav-item">
-                                    <router-link class="nav-link" to="/archived-todos">Archived List</router-link>
+                                    <router-link class="nav-link" to="/archived-todo-list">Archived List</router-link>
                                 </li>
                             </ul>
                             <ul class="navbar-nav  float-end">

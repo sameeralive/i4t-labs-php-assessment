@@ -1,18 +1,27 @@
-import router from "@/router";
-
 const todosModule = {
     state: {
         todos: [],
+        archivedTodos: [],
     },
     getters: {
         todosList: (state) => {
             return state.todos
+        },
+        archivedTodosList: (state) => {
+            return state.archivedTodos
         }
     },
     actions: {
         async fetchTodos({commit}) {
             await axios.get('api/todos').then(res => {
                 commit('setTodos', res.data);
+            }, err => {
+                console.log(err);
+            })
+        },
+        async fetchArchivedTodos({commit}) {
+            await axios.get('api/archived-todos').then(res => {
+                commit('setArchivedTodos', res.data);
             }, err => {
                 console.log(err);
             })
@@ -53,7 +62,18 @@ const todosModule = {
         async archTodo({commit}, updatedTodo) {
             commit( 'showLoadingSpinner', true, {root: true});
             await axios.put('api/todos/' + updatedTodo.id, updatedTodo).then(res => {
-                commit('removeTodo', updatedTodo.id);
+                res.data.data.archive ? commit('removeTodo', updatedTodo.id): '';
+                commit( 'showLoadingSpinner', false, {root: false});
+            }).catch(err => {
+                error.value = err.response.data.message;
+                commit( 'showLoadingSpinner', false, {root: false});
+            });
+        },
+
+        async unarchTodo({commit}, updatedTodo) {
+            commit( 'showLoadingSpinner', true, {root: true});
+            await axios.put('api/todos/' + updatedTodo.id, updatedTodo).then(res => {
+                !res.data.data.archive ? commit('removeArchiveTodo', updatedTodo.id): '';
                 commit( 'showLoadingSpinner', false, {root: false});
             }).catch(err => {
                 error.value = err.response.data.message;
@@ -64,10 +84,12 @@ const todosModule = {
     },
     mutations: {
         setTodos: (state, todos) => (state.todos = todos),
+        setArchivedTodos: (state, todos) => (state.archivedTodos = todos),
         addTodo: (state, newTodo) => {
             state.todos.unshift(newTodo);
         },
         removeTodo: (state, id) => state.todos = state.todos.filter((todo) => todo.id !== id),
+        removeArchiveTodo: (state, id) => state.archivedTodos = state.archivedTodos.filter((todo) => todo.id !== id),
         updateTodo: (state, updatedTodo) => {
            const index = state.todos.findIndex((todo) => todo.id === updatedTodo.id);
             if (index !== -1) {

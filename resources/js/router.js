@@ -3,16 +3,17 @@ import home from "./pages/Home.vue";
 import register from "./pages/Register.vue";
 import login from "./pages/Login.vue";
 import store from "./store/index.js";
+import todoArchievedList from "./components/TodoArchievedList.vue";
 import todoCreateForm from "./components/TodoCreateForm.vue";
 
 const routes = [
-     {
+    {
         path: '/login',
         name: 'Login',
         component: login,
-         meta: {
-             requiresAuth: false,
-         }
+        meta: {
+            requiresAuth: false,
+        }
     }, {
         path: '/register',
         name: 'Register',
@@ -24,6 +25,13 @@ const routes = [
         path: '/',
         name: 'Home',
         component: home,
+        meta: {
+            requiresAuth: true,
+        }
+    }, {
+        path: '/archived-todo-list',
+        name: 'ArchiveList',
+        component: todoArchievedList,
         meta: {
             requiresAuth: true,
         }
@@ -48,7 +56,7 @@ router.beforeEach((to, from) => {
     if (to.meta.requiresAuth && store.getters.getToken === 0) {
         return {name: 'Login'}
     }
-    if (to.meta.requiresAuth === false && store.getters.getToken !== 0 ) {
+    if (to.meta.requiresAuth === false && store.getters.getToken !== 0) {
         return {name: 'Home'}
     }
 })

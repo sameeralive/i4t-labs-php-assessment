@@ -1,10 +1,6 @@
 <template>
     <div class="heading">
-        <h5 id="title">Todo List
-            <span @click="toggleModal(true)" class="btn btn-primary btn-sm float-end">
-                <font-awesome-icon icon="plus"/>
-            </span>
-        </h5>
+        <h5 id="title">Archived Todo List</h5>
     </div>
     <p class="mt-2">Double click to complete</p>
     <div v-if="showModal">
@@ -16,7 +12,7 @@
     </div>
 
     <div class="mt-2">
-        <div v-for="(todo, index) in todosList" :key="index">
+        <div v-for="(todo, index) in archivedTodosList" :key="index">
             <todo-list-view
                 :todo="todo"
                 class="item"
@@ -38,12 +34,11 @@ export default {
     components: {TodoListView, TodoCreateForm},
     data: function () {
         return {
-            todoList: {},
             todoToUpdate: {},
         }
     },
     methods: {
-        ...mapActions(['fetchArchiveTodos']),
+        ...mapActions(['fetchArchivedTodos']),
         toggleModal(val){
             store.commit( 'showModal', val, {root: true});
         },
@@ -57,13 +52,13 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['todosList']),
+        ...mapGetters(['archivedTodosList']),
         ...mapState({
             showModal: state => state.showModal,
         })
     },
     created() {
-        this.fetchTodos();
+        this.fetchArchivedTodos();
     }
 }
 </script>

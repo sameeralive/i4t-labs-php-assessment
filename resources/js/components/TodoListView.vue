@@ -10,8 +10,11 @@
             <button v-if="!todo.completed" @click="editTodo(todo)" class="btn btn-primary btn-sm float-end ms-1">
                 Edit
             </button>
-            <button v-if="!todo.completed" class="btn btn-secondary btn-sm float-end ms-1" @click="archiveTodo(todo)">
+            <button v-if="!todo.archive" class="btn btn-secondary btn-sm float-end ms-1" @click="archiveTodo(todo)">
                 Archive
+            </button>
+            <button v-if="todo.archive" class="btn btn-secondary btn-sm float-end ms-1" @click="unarchiveTodo(todo)">
+                Unarchive
             </button>
 
         </div>
@@ -26,7 +29,7 @@ export default {
     components: {FontAwesomeIcon},
     props: ['todo'],
     methods: {
-        ...mapActions(["removeTodo", "updateTodo", "archTodo"]),
+        ...mapActions(["removeTodo", "updateTodo", "archTodo", "unarchTodo"]),
         updateCompleteStatus(todo) {
             let updatedTodo = Object.assign({}, todo);
             updatedTodo.completed = !updatedTodo.completed;
@@ -37,6 +40,11 @@ export default {
             let updatedTodo = Object.assign({}, todo);
             updatedTodo.archive = true;
             this.archTodo(updatedTodo);
+        },
+        unarchiveTodo(todo) {
+            let updatedTodo = Object.assign({}, todo);
+            updatedTodo.archive = false;
+            this.unarchTodo(updatedTodo);
         },
         editTodo(todo) {
             this.$emit('todoData', todo);

@@ -19,6 +19,9 @@ Route::group([
     'namespace' => 'App\Http\Controllers',
 ], function () {
     Route::resource('/todos', TodoController::class);
+    Route::controller(TodoController::class)->group(function () {
+        Route::get('archived-todos', 'archivedTodoList');
+    });
 });
 
 
