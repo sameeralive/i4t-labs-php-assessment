@@ -34,13 +34,6 @@ const routes = [
         meta: {
             requiresAuth: true,
         }
-    }, {
-        path: '/todo/:id/edit',
-        name: 'TodoCreate',
-        component: todoCreateForm,
-        meta: {
-            requiresAuth: true,
-        }
     },
 ];
 

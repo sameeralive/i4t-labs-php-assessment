@@ -7,10 +7,10 @@
             <button class="btn btn-sm btn-danger float-end ms-1" @click="removeTodo(todo.id)">
                 Delete
             </button>
-            <router-link v-if="!todo.completed" :to="{path: '/todo/'+todo.id+'/edit'}" class="btn btn-primary btn-sm float-end ms-1">
+            <button v-if="!todo.completed" @click="editTodo(todo)" class="btn btn-primary btn-sm float-end ms-1">
                 Edit
-            </router-link>
-            <button v-if="!todo.completed" class="btn btn-secondary btn-sm float-end ms-1" @click="archiveTodo()">
+            </button>
+            <button v-if="!todo.completed" class="btn btn-secondary btn-sm float-end ms-1" @click="archiveTodo(todo)">
                 Archive
             </button>
 
@@ -26,19 +26,20 @@ export default {
     components: {FontAwesomeIcon},
     props: ['todo'],
     methods: {
-        ...mapActions(["removeTodo", "updateTodo"]),
+        ...mapActions(["removeTodo", "updateTodo", "archTodo"]),
         updateCompleteStatus(todo) {
             let updatedTodo = Object.assign({}, todo);
             updatedTodo.completed = !updatedTodo.completed;
             this.updateTodo(updatedTodo);
         },
 
-        archiveTodo() {
-            this.todo.archive = true;
-            this.updateCompleteStatus();
+        archiveTodo(todo) {
+            let updatedTodo = Object.assign({}, todo);
+            updatedTodo.archive = true;
+            this.archTodo(updatedTodo);
         },
-        editTodo() {
-
+        editTodo(todo) {
+            this.$emit('todoData', todo);
         }
     }
 }

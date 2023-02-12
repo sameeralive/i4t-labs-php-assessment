@@ -33,6 +33,7 @@ export default {
         const router = useRouter();
         const store = useStore();
 
+
         let form = reactive({
             email: '',
             password: '',
@@ -41,13 +42,16 @@ export default {
         let error = ref('')
 
         const handleLogin = async () => {
+            store.commit("showLoadingSpinner", true);
             await axios.post('api/login', form).then(res => {
                 if (res.data.success) {
                     store.dispatch('setToken', res.data.data.token)
                     router.push({name: 'Home'})
                 }
+                store.commit("showLoadingSpinner", false);
             }, err => {
                 error.value = err.response.data.message;
+                store.commit("showLoadingSpinner", false);
             })
         }
         return {

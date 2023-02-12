@@ -27,3 +27,29 @@ $clr-5: #e6e6e6;
 .add-btn {
     float: right;
 }
+
+.slide-modal {
+    width: 100vw;
+    height: 100vh;
+    background: rgba($clr-0, 0.3);
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1001;
+}
+
+.form-section {
+    width: 100%;
+    max-width: 500px;
+    display: block;
+    background: $clr-1;
+    color: #000;
+    margin-left: auto;
+    border-radius: 5px;
+    max-height: calc(100vh - 50px);
+    overflow-y: auto;
+    position: fixed;
+    top: 25px;
+    right: 0;
+    z-index: 1001;
+}

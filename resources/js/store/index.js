@@ -6,5 +6,15 @@ export default createStore({
     modules: {
         token: tokenModule,
         todos: todosModule,
+    },
+    state() {
+        return {
+            showLoading: false,
+            showModal: false,
+        }
+    },
+    mutations: {
+        showLoadingSpinner: (state, payload) => (state.showLoading = payload),
+        showModal: (state, payload) => (state.showModal = payload),
     }
 })

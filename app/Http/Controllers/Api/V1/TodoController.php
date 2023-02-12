@@ -17,7 +17,11 @@ class TodoController extends Controller
      */
     public function index()
     {
-        return Todo::orderBy('created_at', 'DESC')->get();
+        return Todo::where('user_id', auth()->user()->id)
+            ->where('archive', 0)
+            ->where('active', 1)
+            ->orderBy('created_at', 'DESC')
+            ->get();
     }
 
     /**
@@ -84,6 +88,10 @@ class TodoController extends Controller
     {
         $existingTodo = Todo::find($id);
         if ($existingTodo) {
+            $existingTodo->name = $request->name;
+            $existingTodo->date = $request->date;
+            $existingTodo->time = $request->time;
+            $existingTodo->important = $request->important;
             $existingTodo->completed = $request->completed;
             $existingTodo->completed_at = $request->completed ? Carbon::now() : null;
             $existingTodo->archive = $request->archive;

@@ -43,7 +43,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['fetchTodos']),
+        ...mapActions(['fetchArchiveTodos']),
         toggleModal(val){
             store.commit( 'showModal', val, {root: true});
         },

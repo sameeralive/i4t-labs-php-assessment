@@ -5,10 +5,12 @@
                 <nav class="navbar navbar-expand-lg bg-body-tertiary">
                     <div class="container-fluid">
                         <a class="navbar-brand" href="#">Navbar</a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" @click="visible = !visible"
+                                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                                aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
-                        <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                        <div class="navbar-collapse justify-content-between" :class="!visible?'collapse':''" id="navbarNav">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
                                     <router-link class="nav-link" to="/">Todo List</router-link>
@@ -30,19 +32,34 @@
             <!--        <router-link class="btn" to="/">Home</router-link>-->
             <!--        <router-link class="btn" to="/login">Login</router-link>-->
             <!--        <router-link class="btn" to="/register">Register</router-link>-->
-        <router-view></router-view>
+            <loader v-if="showLoading"></loader>
+            <router-view></router-view>
         </div>
     </div>
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
+import {mapActions, mapGetters, mapState} from "vuex";
+import Loader from "../components/Loader.vue";
 
 export default {
-    methods: {
-      ...mapActions(['getToken', 'removeToken'])
+    data(){
+        return {
+            visible: false
+        }
     },
-    computed: mapGetters(['getToken']),
+    components: {
+        Loader,
+    },
+    methods: {
+        ...mapActions(['getToken', 'removeToken'])
+    },
+    computed: {
+        ...mapGetters(['getToken']),
+        ...mapState({
+            showLoading: state => state.showLoading
+        })
+    },
 }
 </script>
 

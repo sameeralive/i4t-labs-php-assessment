@@ -1,5 +1,5 @@
 <template>
-    <TodoListComponent></TodoListComponent>
+    <todo-list-component></todo-list-component>
 </template>
 
 <script>
