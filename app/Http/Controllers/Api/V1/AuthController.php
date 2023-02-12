@@ -17,9 +17,9 @@ class AuthController extends Controller
         $inputs = $request->validated();
         $inputs['password'] = bcrypt($inputs['password']);
         $user = User::create($inputs);
-
+        Auth::loginUsingId($user->id);
         $success['token'] = $user->createToken('TodoApp')->plainTextToken;
-        $success['name'] = $user->name;
+        $success['name'] = $user;
 
         return response()->json([
             'success' => true,
@@ -33,7 +33,7 @@ class AuthController extends Controller
         if (Auth::attempt(['email' => $inputs['email'], 'password' => $inputs['password']])) {
             $user = Auth::user();
             $success['token'] = $user->createToken('TodoApp')->plainTextToken;
-            $success['user'] = $user->name;
+            $success['user'] = $user;
 
             return response()->json([
                 'success' => true,
