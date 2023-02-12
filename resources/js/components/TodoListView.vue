@@ -1,5 +1,8 @@
 <template>
-    <div class="item" :class="todo.completed ? 'completed': ''" @dblclick="!todo.archive ? updateCompleteStatus(todo, listType): ''">
+    <div class="item"
+         :class="todo.completed ? 'completed': '', todo.important ? 'important': ''"
+         @dblclick="!todo.archive ? updateCompleteStatus(todo, listType): ''"
+    >
         <div class="form-check">
             <label class="form-check-label" for="important">
                 {{ todo.name }}
@@ -54,10 +57,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .completed {
-        opacity: 0.5;
-        label {
-            text-decoration: line-through;
-        }
+@import "../style";
+
+.completed {
+    opacity: 0.5;
+
+    label {
+        text-decoration: line-through;
     }
+}
+
+.important {
+    border-left: 5px solid $clr-3;
+}
 </style>

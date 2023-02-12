@@ -3,6 +3,7 @@
         <div class="container">
             <div class="row mt-4 justify-content-center">
                 <div class="col-md-6">
+                    <img class="logo" src="../assets/img/logo.png" alt="logo">
                     <h3 class="text-center mb-4">Register</h3>
                     <form action="#" @submit.prevent="handleRegister">
                         <div class="form-group mb-3">
@@ -74,6 +75,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "../style";
 
 </style>

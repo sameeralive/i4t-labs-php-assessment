@@ -20,6 +20,8 @@ class TodoController extends Controller
         return Todo::where('user_id', auth()->user()->id)
             ->where('archive', 0)
             ->where('active', 1)
+            ->orderBy('completed', 'ASC')
+            ->orderBy('completed_at', 'DESC')
             ->orderBy('created_at', 'DESC')
             ->get();
     }
@@ -35,6 +37,8 @@ class TodoController extends Controller
         return Todo::where('user_id', auth()->user()->id)
             ->where('archive', 1)
             ->where('active', 1)
+            ->orderBy('completed', 'ASC')
+            ->orderBy('completed_at', 'DESC')
             ->orderBy('created_at', 'DESC')
             ->get();
     }

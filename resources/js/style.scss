@@ -72,3 +72,24 @@ $clr-5: #e6e6e6;
     }
 }
 
+.logo {
+    max-width: 80px;
+    margin: 10px auto 40px;
+    display: block;
+    animation: flip-with-rotate  25s infinite linear;
+}
+
+@keyframes flip-with-rotate {
+    0% {
+        transform: perspective(80px) rotateY(0);
+    }
+
+    50% {
+        transform: perspective(80px) rotateY(180deg);
+    }
+
+    100% {
+        transform: perspective(80px) rotateY(0);
+    }
+}
+

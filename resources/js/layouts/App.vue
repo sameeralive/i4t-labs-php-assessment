@@ -1,7 +1,7 @@
 <template>
     <div class="col-md-12">
         <div class="row m-0">
-            <div class="col-md-3 left-pannel p-0">
+            <div class="col-md-3 left-pannel p-0" v-if="getToken">
                 <div class="user-data">
                     <img src="../assets/img/user-icon.jpg" alt="user-icon">
                     <h4>Admin</h4>
@@ -31,7 +31,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-md-9 px-0">
+            <div class="px-0" :class="getToken ? 'col-md-9' : 'col-md-12'">
                 <div v-if="getToken" class="nav-section px-3">
                     <nav class="navbar navbar-expand-lg bg-body-tertiary">
                         <div class="container-fluid">
