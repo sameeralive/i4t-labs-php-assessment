@@ -20,17 +20,22 @@ const routes = [
         meta: {
             requiresAuth: false,
         }
-    },
-    {
+    }, {
         path: '/',
         name: 'Home',
         component: home,
         meta: {
             requiresAuth: true,
         }
-    },
-    {
+    }, {
         path: '/todo-create',
+        name: 'TodoCreate',
+        component: todoCreateForm,
+        meta: {
+            requiresAuth: true,
+        }
+    }, {
+        path: '/todo/:id/edit',
         name: 'TodoCreate',
         component: todoCreateForm,
         meta: {
@@ -46,6 +51,7 @@ const router = createRouter({
 
 // check authentication
 router.beforeEach((to, from) => {
+    console.log(store.getters.getToken);
     if (to.meta.requiresAuth && store.getters.getToken === 0) {
         return {name: 'Login'}
     }

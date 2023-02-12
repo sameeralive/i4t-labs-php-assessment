@@ -1,31 +1,31 @@
-import {createStore} from "vuex";
-
 const tokenModule = {
-    state() {
-        return {
-            token: localStorage.getItem('token') || 0,
-        }
-    },
-    mutations: {
-        UPDATE_TOKEN(state, payload) {
-            state.token = payload;
-        },
+    state: {
+        token: localStorage.getItem('token') || 0,
     },
     getters: {
-        setToken(context, payload) {
-            localStorage.setItem('token', payload);
-            context.commit('UPDATE_TOKEN', payload)
+        getToken: (state) => {
+            return state.token
         },
-        removeToken(context) {
-            localStorage.removeItem('token');
-            context.commit('UPDATE_TOKEN', 0);
-        },
+
     },
     actions: {
         getToken: function (state) {
             return state.token
         },
-    }
+        setToken(context, payload) {
+            localStorage.setItem('token', payload);
+            context.commit('updateToken', payload)
+        },
+        removeToken(context) {
+            localStorage.removeItem('token');
+            context.commit('updateToken', 0);
+        },
+    },
+    mutations: {
+        updateToken(state, payload) {
+            state.token = payload;
+        },
+    },
 }
 
 

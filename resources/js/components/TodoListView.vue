@@ -1,22 +1,16 @@
 <template>
-    <div class="item">
+    <div class="item" :class="todo.completed ? 'completed': ''" @dblclick="updateCompleteStatus(todo)">
         <div class="form-check">
-            <input class="form-check-input" type="checkbox"
-                   :checked="todo.completed"
-                   v-model="todo.completed"
-                   @change="updateCompleteStatus()"
-            >
-            <label class="form-check-label" for="important" :class="todo.completed ? 'text-decoration-line-through': ''">
+            <label class="form-check-label" for="important">
                 {{ todo.name }}
             </label>
-            <button class="btn btn-sm btn-danger float-end ms-1" @click="removeTodo()">
-<!--                <font-awesome-icon icon="trash"/>-->
+            <button class="btn btn-sm btn-danger float-end ms-1" @click="removeTodo(todo.id)">
                 Delete
             </button>
-            <button class="btn btn-primary btn-sm float-end ms-1" @click="editTodo()">
+            <router-link v-if="!todo.completed" :to="{path: '/todo/'+todo.id+'/edit'}" class="btn btn-primary btn-sm float-end ms-1">
                 Edit
-            </button>
-            <button class="btn btn-secondary btn-sm float-end ms-1" @click="archiveTodo()">
+            </router-link>
+            <button v-if="!todo.completed" class="btn btn-secondary btn-sm float-end ms-1" @click="archiveTodo()">
                 Archive
             </button>
 
@@ -26,39 +20,35 @@
 
 <script>
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+import {mapActions} from "vuex";
+
 export default {
     components: {FontAwesomeIcon},
     props: ['todo'],
     methods: {
-        updateCompleteStatus(){
-            axios.put('api/todos/' + this.todo.id, this.todo).then(res => {
-                if (res.status === 200) {
-                    this.$emit('itemChanged');
-                }
-            }).catch(err => {
-                console.log(err);
-            });
+        ...mapActions(["removeTodo", "updateTodo"]),
+        updateCompleteStatus(todo) {
+            let updatedTodo = Object.assign({}, todo);
+            updatedTodo.completed = !updatedTodo.completed;
+            this.updateTodo(updatedTodo);
         },
-        removeTodo(){
-            axios.delete('api/todos/' + this.todo.id).then(res => {
-                if (res.status === 200) {
-                    this.$emit('itemChanged');
-                }
-            }).catch(err => {
-                console.log(err);
-            });
-        },
-        archiveTodo(){
+
+        archiveTodo() {
             this.todo.archive = true;
             this.updateCompleteStatus();
         },
-        editTodo(){
+        editTodo() {
 
         }
     }
 }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+    .completed {
+        opacity: 0.5;
+        label {
+            text-decoration: line-through;
+        }
+    }
 </style>

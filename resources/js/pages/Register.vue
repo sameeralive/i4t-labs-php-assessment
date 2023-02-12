@@ -23,6 +23,7 @@
                         </div>
                         <p class="bg-danger text-light text-center py-1 small" v-if="error">{{ error }}</p>
                         <button type="submit" class="btn btn-primary w-100">Register</button>
+                        <router-link to="/login" class="btn btn-outline-primary w-100 mt-2">Log In</router-link>
                     </form>
                 </div>
             </div>
@@ -33,9 +34,10 @@
 <script>
 import {reactive, ref} from "vue";
 import {useRouter} from 'vue-router'
-import {useStore} from "vuex";
+import {mapActions, useStore} from "vuex";
 
 export default {
+
     setup() {
         const router = useRouter();
         const store = useStore();

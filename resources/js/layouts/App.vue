@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="container">
-<!--            <div class="top-bar" v-if="$store.getters.getToken">-->
+            <div class="top-bar" v-if="getToken">
                 <nav class="navbar navbar-expand-lg bg-body-tertiary">
                     <div class="container-fluid">
                         <a class="navbar-brand" href="#">Navbar</a>
@@ -19,13 +19,13 @@
                             </ul>
                             <ul class="navbar-nav  float-end">
                                 <li class="nav-item">
-                                    <router-link to="#" class="nav-link" @click="logout">logout</router-link>
+                                    <router-link to="#" class="nav-link" @click="removeToken">logout</router-link>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </nav>
-<!--            </div>-->
+            </div>
 
             <!--        <router-link class="btn" to="/">Home</router-link>-->
             <!--        <router-link class="btn" to="/login">Login</router-link>-->
@@ -36,23 +36,13 @@
 </template>
 
 <script>
-import {useRouter} from "vue-router";
-import {useStore} from "vuex";
+import {mapActions, mapGetters} from "vuex";
 
 export default {
-    setup() {
-        const router = useRouter();
-        const store = useStore();
-
-        function logout() {
-            store.dispatch('removeToken');
-            router.push({name: 'Login'})
-        }
-
-        return {
-            logout
-        }
-    }
+    methods: {
+      ...mapActions(['getToken', 'removeToken'])
+    },
+    computed: mapGetters(['getToken']),
 }
 </script>
 

@@ -33,6 +33,18 @@ import {useRouter} from "vue-router";
 import {useStore} from "vuex";
 
 export default {
+    mounted() {
+        console.log(this.$route.params.id);
+        // In edit page get data by id from store
+        if (this.$route.params.id) {
+            this.getTodoData(this.$route.params.id)
+        }
+    },
+    methods: {
+        getTodoData(todoId) {
+            console.log(this.store);
+        }
+    },
     setup() {
         const router = useRouter();
 

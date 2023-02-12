@@ -17,7 +17,7 @@ class TodoController extends Controller
      */
     public function index()
     {
-        return Todo::orderBy('created_at', 'DESC')->paginate(1);
+        return Todo::orderBy('created_at', 'DESC')->get();
     }
 
     /**
@@ -84,9 +84,9 @@ class TodoController extends Controller
     {
         $existingTodo = Todo::find($id);
         if ($existingTodo) {
-            $existingTodo->completed = $request->completed ? true : false;
+            $existingTodo->completed = $request->completed;
             $existingTodo->completed_at = $request->completed ? Carbon::now() : null;
-            $existingTodo->archive = $request->archive ? true : false;
+            $existingTodo->archive = $request->archive;
             $existingTodo->save();
             return response()->json([
                 'success' => true,
