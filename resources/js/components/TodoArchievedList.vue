@@ -2,7 +2,6 @@
     <div class="heading">
         <h5 id="title">Archived Todo List</h5>
     </div>
-    <p class="mt-2">Double click to complete</p>
     <div v-if="showModal">
         <div class="slide-modal">
         </div>
@@ -67,11 +66,6 @@ export default {
 @import "../style";
 
 
-.item {
-    background: $clr-5;
-    padding: 15px;
-    margin-bottom: 5px;
-    cursor: pointer;
-}
+
 
 </style>

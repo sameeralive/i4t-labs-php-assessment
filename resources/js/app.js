@@ -7,10 +7,10 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import store from "./store";
 import {library} from '@fortawesome/fontawesome-svg-core'
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
-import {faPlus, faTrash} from '@fortawesome/free-solid-svg-icons'
+import {faPlus, faTrash, faArchive, faEdit} from '@fortawesome/free-solid-svg-icons'
 
 /* add icons to the library */
-library.add(faPlus, faTrash)
+library.add(faPlus, faTrash,  faArchive, faEdit)
 
 createApp(App)
     .use(router)

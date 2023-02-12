@@ -1,20 +1,20 @@
 <template>
-    <div class="item" :class="todo.completed ? 'completed': ''" @dblclick="updateCompleteStatus(todo)">
+    <div class="item" :class="todo.completed ? 'completed': ''" @dblclick="!todo.archive ? updateCompleteStatus(todo, listType): ''">
         <div class="form-check">
             <label class="form-check-label" for="important">
                 {{ todo.name }}
             </label>
-            <button class="btn btn-sm btn-danger float-end ms-1" @click="removeTodo(todo.id)">
-                Delete
+            <button v-if="!todo.archive" class="btn btn-sm btn-danger float-end ms-1" @click="removeTodo(todo.id)">
+                <font-awesome-icon icon="trash"/>
             </button>
             <button v-if="!todo.completed" @click="editTodo(todo)" class="btn btn-primary btn-sm float-end ms-1">
-                Edit
+                <font-awesome-icon icon="edit"/>
             </button>
             <button v-if="!todo.archive" class="btn btn-secondary btn-sm float-end ms-1" @click="archiveTodo(todo)">
-                Archive
+                <font-awesome-icon icon="archive"/>
             </button>
             <button v-if="todo.archive" class="btn btn-secondary btn-sm float-end ms-1" @click="unarchiveTodo(todo)">
-                Unarchive
+                <font-awesome-icon icon="archive"/>
             </button>
 
         </div>
@@ -27,7 +27,7 @@ import {mapActions} from "vuex";
 
 export default {
     components: {FontAwesomeIcon},
-    props: ['todo'],
+    props: ['todo', 'listType'],
     methods: {
         ...mapActions(["removeTodo", "updateTodo", "archTodo", "unarchTodo"]),
         updateCompleteStatus(todo) {

@@ -9,11 +9,13 @@ $clr-5: #e6e6e6;
     background: $clr-2;
     padding: 3px 15px;
     text-align: right;
+
     .logout-btn {
         color: $clr-1;
         font-size: small;
         cursor: pointer;
         transition: all ease-in-out 0.2s;
+
         &:hover {
             color: $clr-3;
         }
@@ -21,9 +23,14 @@ $clr-5: #e6e6e6;
 }
 
 .heading {
-    background: $clr-4;
-    padding: 10px;
+    border-left: 10px solid $clr-2;
+    padding: 8px 10px;
+
+    * {
+        margin-bottom: 0 !important;
+    }
 }
+
 .add-btn {
     float: right;
 }
@@ -53,3 +60,15 @@ $clr-5: #e6e6e6;
     right: 0;
     z-index: 1001;
 }
+
+.item {
+    box-shadow: 1px 1px 3px 1px rgba($clr-5, 0.8);
+    padding: 15px 15px 15px 0;
+    margin-bottom: 10px;
+    cursor: pointer;
+
+    label {
+        cursor: pointer;
+    }
+}
+
