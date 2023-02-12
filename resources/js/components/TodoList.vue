@@ -6,7 +6,7 @@
             </span>
         </h5>
     </div>
-    <p class="mt-2">Double click to complete</p>
+    <p class="mt-4" v-if="todosList.length > 0">Double click to complete</p>
     <div v-if="showModal">
         <div class="slide-modal">
         </div>
@@ -16,9 +16,11 @@
     </div>
 
     <div class="mt-2">
+        <h5 class="text-danger mt-4" v-if="todosList.length === 0">Todo list is empty!</h5>
         <div v-for="(todo, index) in todosList" :key="index">
             <todo-list-view
                 :todo="todo"
+                :listType="'todoList'"
                 class="item"
                 v-on:todoData="editTodo($event)"
             />
@@ -38,7 +40,6 @@ export default {
     components: {TodoListView, TodoCreateForm},
     data: function () {
         return {
-            todoList: {},
             todoToUpdate: {},
         }
     },
@@ -72,11 +73,5 @@ export default {
 @import "../style";
 
 
-.item {
-    background: $clr-5;
-    padding: 15px;
-    margin-bottom: 5px;
-    cursor: pointer;
-}
 
 </style>
